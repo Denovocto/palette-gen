@@ -135,7 +135,9 @@ function generate_initial_colors() {
 
 function replace_color_box(color, forColor) {
     let color_box = document.getElementById(color2hex(color));
-    color_box.replaceWith(new_color_box(forColor));
+    if (color_box) {
+        color_box.replaceWith(new_color_box(forColor));
+    }
 }
 
 function generate_new_colors() {
