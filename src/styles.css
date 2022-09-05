@@ -1,0 +1,103 @@
+.color-palette {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+.color-box {
+    text-align: center;
+    height: 100%;
+    flex: content;
+    width: 5rem;
+    margin: 0rem;
+}
+
+.color-box-action-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    flex: content;
+    visibility: hidden;
+}
+
+.canvas {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.hex-color-button {
+    margin-top: 5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: fit-content;
+    text-decoration: none;
+    transition: font-size 0.2s ease-in-out;
+}
+
+.hex-color-button:hover {
+    filter: brightness(150%);
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.root {
+    height: 100%;
+    margin: 0;
+}
+
+.color-box:hover .color-box-action-column{
+    visibility: visible;
+}
+
+.heart-button:hover .heart{
+    font-size: 3rem;
+}
+
+.heart-button {
+    margin-top: 5rem;
+    padding: 0.5rem;
+    border: none;
+    width: fit-content;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.heart-button:hover {
+    cursor: pointer;
+}
+
+.heart {
+    transition: font-size 0.2s ease-in-out;
+    font-size: 2.5rem;
+}
+
+.delete-button:hover .delete {
+    font-size: 3rem;
+}
+
+.delete-button {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 5rem;
+    padding: 0.5rem;
+    border: none;
+    width: fit-content;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.delete {
+    transition: font-size 0.2s ease-in-out;
+    font-size: 2.5rem;
+}
