@@ -1,6 +1,10 @@
 var colors = [];
 generate_initial_colors();
 
+function luminance(color) {
+    return 0.2126*color[0] + 0.7152*color[1] + 0.0722*color[2];
+}
+
 function new_heart_icon() {
     let heart = document
         .createElement('span');
@@ -36,8 +40,8 @@ function new_delete_button(color) {
         colors = colors.filter((c) => c.color !== color);
     });
     
-    let luminance = 0.2126*color[0] + 0.7152*color[1] + 0.0722*color[2];
-    if (luminance > 128) {
+    let lum = luminance(color);
+    if (lum > 128) {
         delete_icon.style.color = 'black';
     }
     return delete_button;
@@ -54,8 +58,8 @@ function new_hex_color_button(color) {
     hex_color_button.addEventListener('click', () => {
         copy(color_hex);
     });
-    let luminance = 0.2126*color[0] + 0.7152*color[1] + 0.0722*color[2];
-    if (luminance > 128) {
+    let lum = luminance(color);
+    if (lum > 128) {
         hex_color_button.style.color = 'black';
     }
     return hex_color_button;
@@ -80,8 +84,8 @@ function new_heart_button(color) {
         selected_color.liked = !selected_color.liked;
     });
     
-    let luminance = 0.2126*color[0] + 0.7152*color[1] + 0.0722*color[2];
-    if (luminance > 128) {
+    let lum = luminance(color);
+    if (lum > 128) {
         heart.style.color = 'black';
     }
     
