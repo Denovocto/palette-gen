@@ -167,7 +167,6 @@ function new_color() {
 }
 var key_events = {
     'n': () => {
-        debugger;
         if (colors.length < 10) {
             let color_box = new_color_box(new_color());
             document
