@@ -10,8 +10,8 @@
 .color-box {
     text-align: center;
     height: 100%;
-    flex: content;
-    width: 5rem;
+    flex: auto;
+    width: 10%;
     margin: 0rem;
 }
 
