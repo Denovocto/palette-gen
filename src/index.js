@@ -120,13 +120,13 @@ function new_color_box(color)
     color_box.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
     color_box
         .appendChild(color_box_action_column);
-    colors.push({'color': color, 'liked': false});
     return color_box;
 }
 function generate_initial_colors() {
     for (let i = 0; i < 4; i++) {
         let color = new_color();
         let color_box = new_color_box(color);
+        colors.push({color: color, liked: false});
         document
             .getElementById('palette')
             .appendChild(color_box);
@@ -141,35 +141,35 @@ function replace_color_box(color, forColor) {
 }
 
 function generate_new_colors() {
-    let not_liked_colors = colors.filter((c) => !c.liked);
+    let not_liked_colors = colors.filter((c) => c.liked === false);
     not_liked_colors.forEach((c) => {
         let old_color = c.color;
         c.color = new_color();
-        debugger;
         replace_color_box(old_color, c.color);
+        colors = colors.filter((c) => c.color !== old_color);
     })
-
 }
 function new_color() {
     let color = [
-        generateRandomNumberFromRange(0, 255),
-        generateRandomNumberFromRange(0, 255), 
-        generateRandomNumberFromRange(0, 255)
+        generate_random_number_from_range(0, 255),
+        generate_random_number_from_range(0, 255), 
+        generate_random_number_from_range(0, 255)
     ];
     while (colors.find((c) => c === color)) {
         color = [
-            generateRandomNumberFromRange(0, 255), 
-            generateRandomNumberFromRange(0, 255),
-            generateRandomNumberFromRange(0, 255)
+            generate_random_number_from_range(0, 255), 
+            generate_random_number_from_range(0, 255),
+            generate_random_number_from_range(0, 255)
         ];
     }
     return color;
 }
 var key_events = {
     'n': () => {
-        debugger;
         if (colors.length < 10) {
-            let color_box = new_color_box(new_color());
+            let color = new_color();
+            let color_box = new_color_box(color);
+            colors.push({color: color, liked: false});
             document
                 .getElementById('palette')
                 .appendChild(color_box);
@@ -194,7 +194,7 @@ function dec2hex(decimal) {
     return decimal.toString(16).padStart(2, '0').toUpperCase();
 }
 
-function generateRandomNumberFromRange(start, end) {
+function generate_random_number_from_range(start, end) {
     return Math.floor(Math.random() * (end - start + 1)) + start;
 }
 
@@ -202,6 +202,5 @@ document.addEventListener('keydown', function (event) {
     if (event.key in key_events) {
         key_events[event.key]();
     }
-    console.warn(event.key);
 });
 
