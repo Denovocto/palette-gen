@@ -27,6 +27,11 @@
 </head>
 
 <body class="canvas">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service.worker.js');
+        }
+    </script>
     <!-- Color Palette -->
     <div class='color-palette', id="palette">
     </div>
