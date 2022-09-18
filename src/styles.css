@@ -41,6 +41,7 @@
     font-weight: bold;
     width: fit-content;
     text-decoration: none;
+    color: white;
     transition: font-size 0.2s ease-in-out;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
@@ -74,6 +75,7 @@
     border: none;
     width: fit-content;
     text-decoration: none;
+    color: white;
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -102,6 +104,7 @@
     border: none;
     width: fit-content;
     text-decoration: none;
+    color: white;
     background-color: rgba(0, 0, 0, 0);
 }
 
