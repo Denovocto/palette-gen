@@ -42,6 +42,10 @@
     width: fit-content;
     text-decoration: none;
     transition: font-size 0.2s ease-in-out;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; 
 }
 
 .hex-color-button:hover {
@@ -80,6 +84,10 @@
 .heart {
     transition: font-size 0.2s ease-in-out;
     font-size: 2.5rem;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; 
 }
 
 .delete-button:hover .delete {
@@ -100,4 +108,8 @@
 .delete {
     transition: font-size 0.2s ease-in-out;
     font-size: 2.5rem;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; 
 }

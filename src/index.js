@@ -16,6 +16,11 @@ function new_heart_icon() {
     return heart;
 }
 
+function drag_color_box(color) {
+    let color_box = document.getElementById(color2hex(color));
+    color_box.classList.add('dragging');
+}
+
 function new_delete_icon() {
     let trash = document
         .createElement('span');
@@ -122,6 +127,7 @@ function new_color_box(color)
         .add('color-box');
     color_box.id = color2hex(color);
     color_box.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+    // color_box.classList.add('dragging');
     color_box
         .appendChild(color_box_action_column);
     return color_box;
