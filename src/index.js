@@ -1,16 +1,16 @@
-var colors = [];
+var palette = [];
 generate_initial_colors();
 var key_events = {
 	n: () => {
-		if (colors.length < 10) {
+		if (palette.length < 10) {
 			let color = new_color();
 			let color_box = new_color_box(color);
-			colors.push({ color: color, liked: false });
+			palette.push({ color: color, liked: false });
 			document.getElementById("palette").appendChild(color_box);
 		}
 	},
 	e: () => {
-		let liked_colors = colors.filter((c) => c.liked);
+		let liked_colors = palette.filter((c) => c.liked);
 		if (liked_colors.length > 0) {
 			copy(liked_colors.map((c) => color_to_hex(c.color)).join(" "));
 		}
@@ -63,7 +63,7 @@ function new_heart_button(color) {
 		} else {
 			heart.innerText = "favorite_border";
 		}
-		let selected_color = colors.find((c) => c.color === color);
+		let selected_color = palette.find((c) => c.color === color);
 		selected_color.liked = !selected_color.liked;
 	});
 
@@ -100,7 +100,7 @@ function new_delete_button(color) {
 	delete_button.addEventListener("click", () => {
 		let color_box = document.getElementById(color_to_hex(color));
 		color_box.remove();
-		colors = colors.filter((c) => c.color !== color);
+		palette = palette.filter((c) => c.color !== color);
 	});
 
 	let lum = luminance(color);
@@ -182,7 +182,7 @@ function generate_initial_colors() {
 	for (let i = 0; i < 4; i++) {
 		let color = new_color();
 		let color_box = new_color_box(color);
-		colors.push({ color: color, liked: false });
+		palette.push({ color: color, liked: false });
 		document.getElementById("palette").appendChild(color_box);
 	}
 }
@@ -204,12 +204,12 @@ function replace_color_box(color, for_color) {
  * @returns {void}
  */
 function generate_new_colors() {
-	let not_liked_colors = colors.filter((c) => c.liked === false);
+	let not_liked_colors = palette.filter((c) => c.liked === false);
 	not_liked_colors.forEach((c) => {
 		let old_color = c.color;
 		c.color = new_color();
 		replace_color_box(old_color, c.color);
-		colors = colors.filter((c) => c.color !== old_color);
+		palette = palette.filter((c) => c.color !== old_color);
 	});
 }
 
@@ -251,7 +251,7 @@ function new_color() {
 		generate_random_number_from_range(0, 255),
 		generate_random_number_from_range(0, 255),
 	];
-	while (colors.find((c) => c === color)) {
+	while (palette.find((c) => c === color)) {
 		color = [
 			generate_random_number_from_range(0, 255),
 			generate_random_number_from_range(0, 255),
