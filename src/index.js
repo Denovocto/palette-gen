@@ -12,7 +12,7 @@ var key_events = {
 	e: () => {
 		let liked_colors = colors.filter((c) => c.liked);
 		if (liked_colors.length > 0) {
-			copy(liked_colors.map((c) => color2hex(c.color)).join(" "));
+			copy(liked_colors.map((c) => color_to_hex(c.color)).join(" "));
 		}
 	},
 	g: () => {
@@ -98,7 +98,7 @@ function new_delete_button(color) {
 	delete_button.classList.add("delete-button");
 	delete_button.appendChild(delete_icon);
 	delete_button.addEventListener("click", () => {
-		let color_box = document.getElementById(color2hex(color));
+		let color_box = document.getElementById(color_to_hex(color));
 		color_box.remove();
 		colors = colors.filter((c) => c.color !== color);
 	});
@@ -118,7 +118,7 @@ function new_delete_button(color) {
 function new_hex_color_button(color) {
 	let hex_color_button = document.createElement("button");
 	hex_color_button.classList.add("hex-color-button");
-	let color_hex = color2hex(color);
+	let color_hex = color_to_hex(color);
 	hex_color_button.innerText = color_hex;
 	hex_color_button.style.backgroundColor = `rgba(${(color[0] * 1) / 2}, ${
 		(color[1] * 1) / 2
@@ -155,8 +155,8 @@ function new_color_box_action_column(color) {
  * @param {Array} color The color to convert to hex. In [R, G, B] 255bit values.
  * @returns {String} The hex value of the color.
  */
-function color2hex(color) {
-	return `#${dec2hex(color[0])}${dec2hex(color[1])}${dec2hex(color[2])}`;
+function color_to_hex(color) {
+	return `#${dec_to_hex(color[0])}${dec_to_hex(color[1])}${dec_to_hex(color[2])}`;
 }
 
 /**
@@ -168,7 +168,7 @@ function new_color_box(color) {
 	let color_box_action_column = new_color_box_action_column(color);
 	let color_box = document.createElement("div");
 	color_box.classList.add("color-box");
-	color_box.id = color2hex(color);
+	color_box.id = color_to_hex(color);
 	color_box.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
 	color_box.appendChild(color_box_action_column);
 	return color_box;
@@ -193,7 +193,7 @@ function generate_initial_colors() {
  * @param {Array} for_color The color to replace the color box for. In [R, G, B] 255bit values.
  */
 function replace_color_box(color, for_color) {
-	let color_box = document.getElementById(color2hex(color));
+	let color_box = document.getElementById(color_to_hex(color));
 	if (color_box) {
 		color_box.replaceWith(new_color_box(for_color));
 	}
@@ -226,7 +226,7 @@ function copy(text) {
  * @param {number} decimal the number in decimal to convert to hex.
  * @returns {string} The number in hex.
  */
-function dec2hex(decimal) {
+function dec_to_hex(decimal) {
 	return decimal.toString(16).padStart(2, "0").toUpperCase();
 }
 
