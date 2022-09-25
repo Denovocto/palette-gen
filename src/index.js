@@ -120,16 +120,23 @@ function new_hex_color_button(color) {
 	hex_color_button.classList.add("hex-color-button");
 	let color_hex = color_to_hex(color);
 	hex_color_button.innerText = color_hex;
-	hex_color_button.style.backgroundColor = `rgba(${(color[0] * 1) / 2}, ${
-		(color[1] * 1) / 2
-	}, ${(color[2] * 1) / 2}, 0.5)`;
 	hex_color_button.addEventListener("click", () => {
 		copy(color_hex);
 	});
 	let lum = luminance(color);
 	if (lum > 128) {
+        // color is light
 		hex_color_button.style.color = "black";
-	}
+        hex_color_button.style.backgroundColor = `rgba(${color[0] + color[0] * 0.5}, 
+            ${color[1] + color[1] * 0.5}, 
+            ${color[2] + color[2] * 0.5}, 1)`;
+    }
+    else {
+        // color is dark
+        hex_color_button.style.backgroundColor = `rgba(${(color[0]) / 2}, ${
+            (color[1]) / 2
+        }, ${(color[2]) / 2}, 0.5)`;
+    }
 	return hex_color_button;
 }
 

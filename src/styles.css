@@ -13,6 +13,7 @@
     flex: auto;
     width: 10%;
     margin: 0rem;
+    transition: width 0.2s ease-in-out;
 }
 
 .color-box-action-column {
@@ -21,7 +22,6 @@
     align-items: center;
     height: 100%;
     flex: content;
-    visibility: hidden;
 }
 
 .canvas {
@@ -50,7 +50,6 @@
 }
 
 .hex-color-button:hover {
-    filter: brightness(150%);
     cursor: pointer;
     font-weight: bolder;
     font-size: 2rem;
@@ -61,7 +60,15 @@
     margin: 0;
 }
 
-.color-box:hover .color-box-action-column{
+.color-box:hover {
+    width: 12%;
+}
+
+.color-box:hover .heart-button{
+    visibility: visible;
+}
+
+.color-box:hover .delete-button{
     visibility: visible;
 }
 
@@ -77,6 +84,7 @@
     text-decoration: none;
     color: white;
     background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
 }
 
 .heart-button:hover {
@@ -99,6 +107,7 @@
 .delete-button {
     position: absolute;
     bottom: 0;
+    margin-top: 5rem;
     margin-bottom: 5rem;
     padding: 0.5rem;
     border: none;
@@ -106,6 +115,7 @@
     text-decoration: none;
     color: white;
     background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
 }
 
 .delete {
