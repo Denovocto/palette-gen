@@ -8,12 +8,14 @@
 }
 
 .color-box {
+    --x: 0px;
     text-align: center;
     height: 100%;
     flex: auto;
     width: 10%;
     margin: 0rem;
-    transition: width 0.2s ease-in-out;
+    transform: translateX(var(--x));
+    /* transition: width 0.2s ease-in-out; */
 }
 
 .color-box-action-column {
@@ -60,15 +62,19 @@
     margin: 0;
 }
 
-.color-box:hover {
+/* .color-box:hover {
     width: 12%;
-}
+} */
 
 .color-box:hover .heart-button{
     visibility: visible;
 }
 
 .color-box:hover .delete-button{
+    visibility: visible;
+}
+
+.color-box:hover .drag-indicator-button{
     visibility: visible;
 }
 
@@ -93,6 +99,29 @@
 
 .heart {
     transition: font-size 0.2s ease-in-out;
+    font-size: 2.5rem;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; 
+}
+
+.drag-indicator-button:hover {
+    cursor: grab;
+}
+
+.drag-indicator-button {
+    margin-top: 20rem;
+    padding: 0.5rem;
+    border: none;
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
+}
+
+.drag-indicator {
     font-size: 2.5rem;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */

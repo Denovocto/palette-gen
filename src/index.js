@@ -1,4 +1,5 @@
 var palette = [];
+var grabbing = false;
 generate_initial_colors();
 var key_events = {
 	n: () => {
@@ -26,6 +27,29 @@ document.addEventListener("keydown", function (event) {
 	}
 });
 
+document.addEventListener("pointermove", (e) => {
+	e.preventDefault();
+	let mouseX = +e.clientX.toFixed(2);
+	let grabbed_color_box = document.querySelector(".grabbing");
+	if (grabbing === true) {
+		let color_box_bounding_box = grabbed_color_box.getBoundingClientRect();
+		let color_box_width = +color_box_bounding_box.width.toFixed(2);
+		let color_box_half_width = +(color_box_width / 2).toFixed(2);
+		let color_box_edge = +color_box_bounding_box.left.toFixed(2);
+		let x = color_box_edge;
+		console.warn(x);
+		grabbed_color_box.style.setProperty("--x", `${mouseX - x}px`);
+	}
+});
+
+document.addEventListener("pointercancel", () => {
+	console.warn("drag indicator canceled");
+	grabbing = false;
+	drag_indicator_button.parentElement.parentElement.classList.remove(
+		"grabbing"
+	);
+});
+
 /**
  * Returns the luminance value of a color.
  * @param {Array} color The color to calculate the luminance of in [R, G, B] 255bit values.
@@ -33,6 +57,47 @@ document.addEventListener("keydown", function (event) {
  */
 function luminance(color) {
 	return 0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2];
+}
+
+function new_drag_indicator_icon() {
+	let drag_indicator = document.createElement("span");
+	drag_indicator.classList.add("material-icons");
+	drag_indicator.classList.add("drag-indicator");
+	drag_indicator.innerText = "drag_indicator";
+	return drag_indicator;
+}
+
+function new_drag_indicator_button(color) {
+	let drag_indicator = new_drag_indicator_icon();
+	let drag_indicator_button = document.createElement("button");
+	drag_indicator_button.classList.add("drag-indicator-button");
+	drag_indicator_button.appendChild(drag_indicator);
+	drag_indicator_button.addEventListener("pointerdown", () => {
+		console.warn("drag indicator grabbed");
+		grabbing = true;
+		drag_indicator_button.parentElement.parentElement.classList.add(
+			"grabbing"
+		);
+	});
+	drag_indicator_button.addEventListener("pointerup", () => {
+		console.warn("drag indicator released");
+		grabbing = false;
+		drag_indicator_button.parentElement.parentElement.classList.remove(
+			"grabbing"
+		);
+	});
+	drag_indicator_button.addEventListener("pointerleave", () => {
+		console.warn("drag canceled");
+		grabbing = false;
+		drag_indicator_button.parentElement.parentElement.classList.remove(
+			"grabbing"
+		);
+	});
+	let lum = luminance(color);
+	if (lum > 128) {
+		drag_indicator.style.color = "black";
+	}
+	return drag_indicator_button;
 }
 
 /**
@@ -125,18 +190,19 @@ function new_hex_color_button(color) {
 	});
 	let lum = luminance(color);
 	if (lum > 128) {
-        // color is light
+		// color is light
 		hex_color_button.style.color = "black";
-        hex_color_button.style.backgroundColor = `rgba(${color[0] + color[0] * 0.5}, 
+		hex_color_button.style.backgroundColor = `rgba(${
+			color[0] + color[0] * 0.5
+		}, 
             ${color[1] + color[1] * 0.5}, 
             ${color[2] + color[2] * 0.5}, 1)`;
-    }
-    else {
-        // color is dark
-        hex_color_button.style.backgroundColor = `rgba(${(color[0]) / 2}, ${
-            (color[1]) / 2
-        }, ${(color[2]) / 2}, 0.5)`;
-    }
+	} else {
+		// color is dark
+		hex_color_button.style.backgroundColor = `rgba(${color[0] / 2}, ${
+			color[1] / 2
+		}, ${color[2] / 2}, 0.5)`;
+	}
 	return hex_color_button;
 }
 
@@ -150,9 +216,11 @@ function new_color_box_action_column(color) {
 	color_box_action_column.classList.add("color-box-action-column");
 	let hex_color_button = new_hex_color_button(color);
 	let heart_button = new_heart_button(color);
+	// let drag_indicator_button = new_drag_indicator_button(color);
 	let delete_button = new_delete_button(color);
 	color_box_action_column.appendChild(hex_color_button);
 	color_box_action_column.appendChild(heart_button);
+	// color_box_action_column.appendChild(drag_indicator_button);
 	color_box_action_column.appendChild(delete_button);
 	return color_box_action_column;
 }
@@ -163,7 +231,9 @@ function new_color_box_action_column(color) {
  * @returns {String} The hex value of the color.
  */
 function color_to_hex(color) {
-	return `#${dec_to_hex(color[0])}${dec_to_hex(color[1])}${dec_to_hex(color[2])}`;
+	return `#${dec_to_hex(color[0])}${dec_to_hex(color[1])}${dec_to_hex(
+		color[2]
+	)}`;
 }
 
 /**
