@@ -27,6 +27,13 @@
 </head>
 
 <body class="canvas">
+</div>
+<button data-open-modal class="information-button"> 
+    <span class="material-icons information">
+        question_mark
+    </span>
+</button>
+</div>
     <!-- <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service.worker.js');
@@ -34,6 +41,23 @@
     </script> -->
     <!-- Color Palette -->
     <div class='color-palette', id="palette">
-    </div>
+    <dialog data-modal class="dialog-glass">
+        <h1>How to use palette-gen</h1>
+        <h2> Usage: </h2>
+        <ul>
+            <li> Click on a color's HEX button to copy it to your clipboard in HEX format </li>
+            <li> Hover your mouse on a color to see the <b>like</b> and <b>delete</b> action buttons </li>
+            <li> Click on the heart to <b>like</b> a color make it persist when generating new colors </li>
+            <li> Click on the trashcan to <b>delete</b> the selected color from the palette </li>
+        </ul>
+        <h2> Keybindings: </h2>
+        <ul>
+            <li> <b>g</b> - Generate a new colors for the colors that aren't <b>liked</b> </li>
+            <li> <b>e</b> - Export the palette to clipboard</li>
+            <li> <b>n</b> - Add a new random color to the current palette up to a maximum of 10</li>
+        </ul>
+
+        <button data-close-modal> Close </button>
+    </dialog>
 </body>
 

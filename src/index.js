@@ -206,6 +206,33 @@ function new_hex_color_button(color) {
 	return hex_color_button;
 }
 
+// /**
+//  * Creates a new button with of the of @param color inside it as text.
+//  * @param {Array} color The color for the color box that the hex button is for. In [R, G, B] 255bit values.
+//  * @returns {HTMLButtonElement} The color picker.
+//  */
+// function new_color_picker_button(color) {
+// 	let color_picker_button = document.createElement("input");
+// 	color_picker_button.classList.add("color-picker-button");
+// 	color_picker_button.type = "color";
+// 	let lum = luminance(color);
+// 	if (lum > 128) {
+// 		// color is light
+// 		color_picker_button.style.color = "black";
+// 		color_picker_button.style.backgroundColor = `rgba(${
+// 			color[0] + color[0] * 0.5
+// 		}, 
+//             ${color[1] + color[1] * 0.5}, 
+//             ${color[2] + color[2] * 0.5}, 1)`;
+// 	} else {
+// 		// color is dark
+// 		color_picker_button.style.backgroundColor = `rgba(${color[0] / 2}, ${
+// 			color[1] / 2
+// 		}, ${color[2] / 2}, 0.5)`;
+// 	}
+// 	return color_picker_button;
+// }
+
 /**
  * Creates a new div with the hex button, the heart button and the delete button inside it and returns it.
  * @param {Array} color The color for the color box that the action column is for. In [R, G, B] 255bit values.
@@ -215,9 +242,12 @@ function new_color_box_action_column(color) {
 	let color_box_action_column = document.createElement("div");
 	color_box_action_column.classList.add("color-box-action-column");
 	let hex_color_button = new_hex_color_button(color);
+	debugger;
+	// let color_picker_button = new_color_picker_button(color);
 	let heart_button = new_heart_button(color);
 	// let drag_indicator_button = new_drag_indicator_button(color);
 	let delete_button = new_delete_button(color);
+	// color_box_action_column.appendChild(color_picker_button);
 	color_box_action_column.appendChild(hex_color_button);
 	color_box_action_column.appendChild(heart_button);
 	// color_box_action_column.appendChild(drag_indicator_button);
@@ -337,3 +367,15 @@ function new_color() {
 	}
 	return color;
 }
+
+const openModal = document.querySelector("[data-open-modal]");
+const closeModal = document.querySelector("[data-close-modal]");
+const modal = document.querySelector("[data-modal]");
+
+openModal.addEventListener("click", () => {
+	modal.showModal();
+});
+
+closeModal.addEventListener("click", () => {
+	modal.close();
+});
